@@ -34,7 +34,7 @@ def simulate_trade(pr,long_short):
     #pr['oc']=(pr.close-pr.close.shift(1))/pr.close.shift(1) * 100
     #pr.loc[0,'oc'] = (pr.close.loc[0]-pr.open.loc[0])/pr.open.loc[0] * 100
 
-    print(pr)
+    #print(pr)
     s=0
     for index,row in pr.iloc[0:len(pr)].iterrows():
         if(long_short=='long'): 
@@ -90,10 +90,13 @@ def extract_signal_trades(pr):
       
       rets=simulate_trade(k2.iloc[signal_up+1:],'long')
 
-    else:# Condition for short trade with exit at the end of the day
+
+    elif((len(signal_up)==0) & (len(signal_down)>0)):#Condition for long trade with exit at the end of the day
       signal_down=signal_down[0]
 
       rets=simulate_trade(k2.iloc[signal_down+1:],'short')
+    else:
+      rets=0
 
     return rets
 
