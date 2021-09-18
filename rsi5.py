@@ -61,7 +61,7 @@ print("sharpe: ",sdayret.mean()/sdayret.std())
 s=1000
 s1=[]
 for i in [random.choice(sdayret) for _ in range(3000)]:# Sampling with replacement
-  s=s*(1+2*i/100)
+  s=s*(1+2*i/100)# 2 is the leverage multiplier
   s1.append(s)
 print(s)
 s1=pd.Series(s1)
